@@ -1,6 +1,6 @@
 # Junior School Math Olympiad — Problem Bank
 
-A browsable bank of **1,285 olympiad problems** for primary pupils, aimed at Years 3–6 (British programme) / Grades 1–4 (Kazakhstan and former Soviet programmes). Problems are collected from olympiads and sorted by topic, year and difficulty.
+A browsable bank of **1,293 olympiad problems** for primary pupils, aimed at Years 3–6 (British programme) / Grades 1–4 (Kazakhstan and former Soviet programmes). Problems are collected from olympiads and sorted by topic, year and difficulty.
 
 The repository is a self-contained static site: open `index.html` and the whole bank is filterable, printable and exportable in the browser.
 
@@ -20,8 +20,8 @@ It also works as-is on GitHub Pages (Settings → Pages → deploy from `main`, 
 | Path | What it is |
 | --- | --- |
 | `index.html` | The viewer: filtering, problem-set builder, print view, progress tracking |
-| `problems.json` | The problem bank — a flat JSON array of 1,285 problems |
-| `images/` | 275 figures referenced by problems (grids, clocks, nets, diagrams) |
+| `problems.json` | The problem bank — a flat JSON array of 1,293 problems |
+| `images/` | 277 figures referenced by problems (grids, clocks, nets, diagrams) |
 
 ## Problem schema
 
@@ -41,7 +41,7 @@ Each entry in `problems.json` is an object:
 
 | Field | Meaning |
 | --- | --- |
-| `n` | Unique problem ID, `1`–`1288` (a few numbers are unused where duplicates were removed) |
+| `n` | Unique problem ID, `1`–`1296` (a few numbers are unused where duplicates were removed) |
 | `topic` | One of 37 topics (see below) |
 | `year` | Target year group |
 | `prob` | Problem statement (may contain newlines) |
@@ -51,31 +51,31 @@ Each entry in `problems.json` is an object:
 
 ## Composition
 
-**By year group** — Year 3: 324 · Year 4: 279 · Year 5: 361 · Year 6: 313 · Year 1: 8
+**By year group** — Year 3: 324 · Year 4: 279 · Year 5: 361 · Year 6: 321 · Year 1: 8
 
-**By difficulty** — 1: 72 · 2: 300 · 3: 515 · 4: 398
+**By difficulty** — 1: 72 · 2: 301 · 3: 520 · 4: 400
 
-**By source** — FEMO: 800 · Saint Petersburg Mathematical Olympiad: 485
+**By source** — FEMO: 808 · Saint Petersburg Mathematical Olympiad: 485
 
 **By topic**
 
 | Topic | Count |
 | --- | ---: |
-| Arithmetic word problem – finding the whole or part | 100 |
-| Digit properties / number puzzles | 98 |
-| Spatial reasoning | 97 |
+| Arithmetic word problem – finding the whole or part | 101 |
+| Digit properties / number puzzles | 99 |
+| Spatial reasoning | 98 |
 | Logic – quantitative bounding | 92 |
-| Equations | 89 |
+| Equations | 91 |
 | Combinatorics – arrangements / permutations | 60 |
 | Sets – inclusion–exclusion | 55 |
 | Logic – knights and liars | 54 |
-| Age problems | 49 |
+| Age problems | 50 |
 | Arithmetic – net displacement | 49 |
 | Iterative / process counting | 44 |
 | Counting 2D figures | 43 |
 | Number sequences & patterns | 40 |
+| Counting digits | 37 |
 | Figures and numbers | 37 |
-| Counting digits | 36 |
 | Cryptarithm | 36 |
 | Geometry – perimeter of combined figures | 34 |
 | Cuts and pieces (fencepost counting) | 31 |
@@ -92,10 +92,10 @@ Each entry in `problems.json` is an object:
 | LCM / common multiples (cycles) | 8 |
 | Graph colouring | 5 |
 | Ciphers / decoding | 4 |
+| Logic – casework counting | 2 |
 | Symmetry | 1 |
 | Odd one out / visual pattern recognition | 1 |
 | Logic – hat puzzles / common knowledge | 1 |
-| Logic – casework counting | 1 |
 | Tournaments / handshakes | 1 |
 | Dividing a figure into regions | 1 |
 
