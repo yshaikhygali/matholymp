@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Junior School Math Olympiad - Problem Bank</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+:root{--b:#1F4E78;--line:#e3e8ef;}
+*{box-sizing:border-box;}
+body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#f6f8fb;color:#1a2230;}
+header{background:var(--b);color:#fff;padding:14px 20px;}
+header h1{margin:0;font-size:18px;font-weight:700;}
+header .sub{opacity:.85;font-size:12px;margin-top:2px;}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:12px 20px;background:#fff;border-bottom:1px solid var(--line);z-index:5;}
+.controls input,.controls select{font:inherit;padding:7px 9px;border:1px solid #cbd5e1;border-radius:7px;background:#fff;}
+.controls input[type=search]{min-width:230px;}
+.count{margin-left:auto;font-size:13px;color:#5b6472;}
+.btn{cursor:pointer;background:#eef2f7;border:1px solid #cbd5e1;border-radius:7px;padding:7px 11px;}
+.btn.primary{background:var(--b);color:#fff;border-color:var(--b);}
+.btn.add{background:#1a7f4b;color:#fff;border-color:#1a7f4b;font-weight:700;}
+.wrap{padding:14px 20px 60px;}
+table{border-collapse:collapse;width:100%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.06);border-radius:8px;overflow:hidden;}
+th,td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top;font-size:13px;}
+th{background:#eaf0f7;position:sticky;top:0;cursor:pointer;user-select:none;white-space:nowrap;z-index:3;}
+th .ar{opacity:.45;font-size:11px;}
+th.sorted .ar{opacity:1;color:var(--b);}
+td.n{color:#94a3b8;font-variant-numeric:tabular-nums;white-space:nowrap;}
+td.topic{font-weight:600;color:#25405c;white-space:nowrap;}
+td.prob{max-width:640px;line-height:1.45;}
+td.prob img{display:block;margin:8px 8px 0 0;max-width:280px;height:auto;border:1px solid var(--line);border-radius:6px;background:#fff;}
+.diff{display:inline-block;min-width:26px;text-align:center;font-weight:700;border-radius:6px;padding:3px 8px;}
+.d1{background:#C6EFCE;color:#12633a;} .d2{background:#FFEB9C;color:#7a5c00;}
+.d3{background:#F8CBAD;color:#8a3b12;} .d4{background:#F4B0B0;color:#8a1c1c;}
+td.src{white-space:nowrap;color:#41506a;}
+tr:hover td{background:#f9fbfe;}
+.del{cursor:pointer;color:#b91c1c;border:none;background:none;font-size:15px;padding:0 4px;}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1f2937;color:#fff;padding:12px 18px;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.25);display:none;align-items:center;gap:14px;z-index:2000;font-size:14px;}
+#toast button{background:#374151;color:#fff;border:none;border-radius:6px;padding:6px 12px;cursor:pointer;font-size:13px;}
+#toast button:hover{background:#4b5563;}
+.trashrow{display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px solid #eef2f7;}
+.trashrow .meta{flex:1;min-width:0;}
+.trashrow .meta small{color:#64748b;}
+.trashrow button{background:#1F4E78;color:#fff;border:none;border-radius:6px;padding:5px 12px;cursor:pointer;font-size:13px;}
+.edt{cursor:pointer;color:#1F4E78;border:none;background:none;font-size:14px;padding:0 4px;}
+.edt:hover{color:#0d2c46;}
+.tagedit{font-size:10px;background:#b45309;color:#fff;border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:middle;}
+.tagnew{font-size:10px;background:#1a7f4b;color:#fff;border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:middle;}
+/* modal */
+.overlay{display:none;position:fixed;inset:0;background:rgba(15,25,40,.45);z-index:20;}
+.overlay.on{display:flex;align-items:flex-start;justify-content:center;padding:30px 16px;overflow:auto;}
+.modal{background:#fff;border-radius:12px;max-width:640px;width:100%;padding:22px 24px;box-shadow:0 12px 40px rgba(0,0,0,.25);}
+.modal h2{margin:0 0 14px;font-size:17px;color:var(--b);}
+.fld{margin-bottom:13px;}
+.fld label{display:block;font-size:12px;font-weight:700;color:#41506a;margin-bottom:5px;}
+.fld input,.fld select,.fld textarea{width:100%;font:inherit;padding:8px 10px;border:1px solid #cbd5e1;border-radius:8px;}
+.fld textarea{min-height:90px;resize:vertical;}
+.previmg{display:inline-block;margin:6px 6px 0 0;position:relative;}
+.previmg img{max-width:110px;max-height:90px;border:1px solid var(--line);border-radius:6px;}
+.previmg button{position:absolute;top:-8px;right:-8px;background:#b91c1c;color:#fff;border:none;border-radius:50%;width:20px;height:20px;cursor:pointer;line-height:1;}
+.rowbtns{display:flex;gap:10px;justify-content:flex-end;margin-top:8px;}
+.hint{font-size:11px;color:#7a8699;margin-top:4px;}
+@media(max-width:700px){td.prob img{max-width:180px;}}
+
+th.sel,td.sel{width:30px;text-align:center;}
+.selbox,#selAll{width:15px;height:15px;cursor:pointer;accent-color:var(--b);}
+.exportbar{background:#eef6ff;border-bottom:1px solid var(--line);}
+.exportbar .lbl{font-weight:700;font-size:13px;color:#25405c;}
+.exportbar label{font-size:13px;display:flex;align-items:center;gap:5px;color:#39424f;}
+.btn:disabled{opacity:.45;cursor:not-allowed;}
+
+.tabs{display:flex;gap:2px;background:var(--b);padding:0 20px;}
+.tabs button{font:inherit;font-weight:600;font-size:13px;cursor:pointer;border:0;padding:9px 16px;
+  background:rgba(255,255,255,.15);color:#fff;border-radius:8px 8px 0 0;}
+.tabs button.on{background:#f6f8fb;color:var(--b);}
+.view{display:none;} .view.on{display:block;}
+.stwrap{padding:14px 20px 60px;display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);}
+.roster{width:290px;flex:none;padding:12px;}
+.roster h3,.prog h3{margin:0 0 10px;font-size:14px;color:var(--b);}
+.roster .addrow{display:flex;gap:6px;margin-bottom:10px;}
+.roster input,.roster select{font:inherit;font-size:13px;padding:6px 7px;border:1px solid #cbd5e1;border-radius:6px;min-width:0;}
+.roster input#sName{flex:1;}
+.stlist{list-style:none;margin:0;padding:0;max-height:60vh;overflow:auto;}
+.stlist li{display:flex;align-items:center;gap:6px;padding:7px 8px;border-radius:7px;cursor:pointer;font-size:13px;}
+.stlist li:hover{background:#f1f5fb;}
+.stlist li.on{background:var(--b);color:#fff;}
+.stlist .nm{flex:1;font-weight:600;}
+.stlist .gr{font-size:11px;opacity:.75;white-space:nowrap;}
+.stlist .rm{border:0;background:transparent;color:inherit;opacity:.5;cursor:pointer;font-size:14px;}
+.stlist .rm:hover{opacity:1;color:#c0392b;}
+.prog{flex:1;min-width:420px;padding:12px;}
+.prog .bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px;}
+.prog .bar select,.prog .bar input{font:inherit;font-size:13px;padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;}
+.stats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;}
+.chip{font-size:12px;font-weight:700;border-radius:20px;padding:4px 11px;background:#eef2f7;color:#39424f;}
+.chip.s3{background:#d7f2e0;color:#186b3c;} .chip.s2{background:#fdeecd;color:#8a5b00;}
+.chip.s1{background:#e2e8f0;color:#475569;} .chip.s0{background:#f4f4f5;color:#71717a;}
+.ptable{width:100%;border-collapse:collapse;}
+.ptable th,.ptable td{border-bottom:1px solid var(--line);padding:8px 9px;font-size:13px;text-align:left;vertical-align:top;}
+.ptable th{background:#eaf0f7;position:sticky;top:0;z-index:2;}
+.ptable td.pt{max-width:520px;line-height:1.4;}
+.marks{display:flex;gap:4px;}
+.marks button{font:inherit;font-size:11px;font-weight:700;cursor:pointer;border:1px solid #cbd5e1;
+  background:#fff;color:#475569;border-radius:6px;padding:4px 8px;white-space:nowrap;}
+.marks button.on.m3{background:#1a7f4b;border-color:#1a7f4b;color:#fff;}
+.marks button.on.m2{background:#d59300;border-color:#d59300;color:#fff;}
+.marks button.on.m1{background:#64748b;border-color:#64748b;color:#fff;}
+.marks button.on.m0{background:#94a3b8;border-color:#94a3b8;color:#fff;}
+.empty{color:#7a828f;font-size:13px;padding:20px 4px;}
+
+.subtabs{display:flex;gap:6px;margin-bottom:12px;}
+.subtabs button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:1px solid #cbd5e1;
+  background:#fff;color:#475569;border-radius:20px;padding:5px 14px;}
+.subtabs button.on{background:var(--b);border-color:var(--b);color:#fff;}
+.pane{display:none;} .pane.on{display:block;}
+.dash{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;}
+.dcard{border:1px solid var(--line);border-radius:10px;padding:13px 15px;background:#fff;}
+.dcard.wide{grid-column:1/-1;}
+.dcard h4{margin:0 0 12px;font-size:12px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.05em;color:#64748b;}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:14px;}
+.kpi{border:1px solid var(--line);border-radius:10px;padding:11px 13px;background:#fff;}
+.kpi .v{font-size:26px;font-weight:800;line-height:1.1;color:var(--b);}
+.kpi .l{font-size:11px;color:#64748b;margin-top:3px;font-weight:600;}
+.kpi.g .v{color:#1a7f4b;} .kpi.a .v{color:#b8820a;}
+.ring{display:flex;align-items:center;gap:16px;}
+.ring .lg{font-size:12px;line-height:1.9;color:#39424f;}
+.ring .lg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:7px;font-style:normal;}
+.bars{display:flex;flex-direction:column;gap:9px;}
+.brow{display:grid;grid-template-columns:1fr 128px 42px;gap:9px;align-items:center;font-size:12px;}
+.brow .nm{color:#39424f;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.track{height:15px;border-radius:8px;background:#eef2f7;overflow:hidden;display:flex;}
+.track span{height:100%;}
+.brow .pc{text-align:right;font-weight:700;color:#475569;font-variant-numeric:tabular-nums;}
+.hint2{font-size:11px;color:#7a828f;margin-top:9px;line-height:1.6;}
+.strengths{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.strengths ul{list-style:none;margin:0;padding:0;font-size:12.5px;}
+.strengths li{padding:5px 0;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;gap:8px;}
+.strengths li span{color:#64748b;font-weight:700;white-space:nowrap;}
+.strengths h5{margin:0 0 7px;font-size:12px;color:#39424f;}
+@media(max-width:640px){.strengths{grid-template-columns:1fr;}}
+</style></head><body>
+<header><h1>Junior School Math Olympiad - Problem Bank</h1><div class="sub">click a column header to sort · filter by topic, difficulty or source · add your own problems</div></header>
+<div class="tabs"><button id="tabBank" class="on">Problem bank</button><button id="tabStu">Students</button></div>
+<div class="view on" id="viewBank">
+<div class="controls">
+<button class="btn add" id="addBtn">+ Add problem</button>
+<input type="search" id="q" placeholder="Search problems…">
+<select id="fyear"><option value="">All years</option><option value="1">Year 1</option><option value="2">Year 2</option><option value="3">Year 3</option><option value="4">Year 4</option><option value="5">Year 5</option><option value="6">Year 6</option></select>
+<select id="ftopic"><option value="">All topics</option></select>
+<select id="fdiff"><option value="">All difficulty</option><option value="1">1 · Easy</option><option value="2">2 · Medium</option><option value="3">3 · Hard</option><option value="4">4 · Hardest</option></select>
+<select id="fsrc"><option value="">All sources</option></select>
+<button class="btn" id="reset">Reset</button>
+<button class="btn" id="trashBtn" title="View and restore deleted problems">🗑 Deleted (0)</button>
+<button class="btn primary" id="exportBtn">&#8595; Download problems.json</button>
+<span class="count" id="count"></span>
+</div>
+<div class="controls exportbar">
+<span class="lbl">Export selected:</span>
+<button class="btn primary" id="pdfBtn" disabled>Download PDF</button>
+<button class="btn primary" id="docBtn" disabled>Download Word</button>
+<select id="optOrder"><option value="cur">Numbered order</option><option value="topic">Group by topic</option></select>
+<label><input type="checkbox" id="optMeta"> include topic / difficulty / source</label>
+<button class="btn" id="clearSel">Clear selection</button>
+<span class="count" id="selInfo">0 selected</span>
+</div>
+<datalist id="topiclist"><option value="Age problems"></option><option value="Arithmetic Word Problem – Finding the Whole or Part."></option><option value="Arithmetic – net displacement"></option><option value="Circular arrangement"></option><option value="Clock / Time reading"></option><option value="Combinatorics – arrangements / permutations"></option><option value="Counting 2d Figures"></option><option value="Counting consecutive numbers"></option><option value="Counting digits"></option><option value="Cryptarithm"></option><option value="Cuts and pieces (fencepost counting)"></option><option value="Digit properties / number puzzles"></option><option value="Equations"></option><option value="Figures and numbers"></option><option value="Geometry – perimeter of combined figures"></option><option value="Heads and legs"></option><option value="Iterative/Process counting"></option><option value="LCM / common multiples (cycles"></option><option value="Logic – Knights and liars"></option><option value="Logic – Matching"></option><option value="Logic – Quantitative bounding"></option><option value="Logic – sequence / correspondence reasoning"></option><option value="Number sequences &amp; patterns"></option><option value="Remainder/equal distribution"></option><option value="Sets – Inclusion–Exclusion"></option><option value="Spatial reasoning"></option><option value="Symmetry"></option><option value="Work rate/productivity"></option></datalist>
+<div id="toast"><span id="toastMsg"></span><button id="toastUndo">Undo</button></div>
+<div class="overlay" id="trashOverlay"><div class="modal" style="max-width:640px">
+<h2>Deleted problems</h2>
+<p style="color:#475569;margin:.2em 0 1em">These are hidden from the bank and will be omitted from the next <b>problems.json</b> export. Restore any you want back. This list lives in your browser.</p>
+<div id="trashList" style="max-height:50vh;overflow:auto"></div>
+<div class="rowbtns" style="margin-top:16px"><button class="btn" id="trashRestoreAll" style="margin-right:auto">Restore all</button><button class="btn" id="trashClose">Close</button></div>
+</div></div>
+<div class="wrap"><table><thead><tr>
+<th class="sel"><input type="checkbox" id="selAll" title="Select all shown"></th>
+<th data-k="n">#<span class="ar">↕</span></th>
+<th data-k="year">Year<span class="ar">↕</span></th>
+<th data-k="topic">Topic<span class="ar">↕</span></th>
+<th data-k="prob">Problem<span class="ar">↕</span></th>
+<th data-k="diff">Difficulty<span class="ar">↕</span></th>
+<th data-k="source">Source<span class="ar">↕</span></th>
+<th></th>
+</tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+<div class="view" id="viewStu"><div class="stwrap">
+<div class="card roster">
+<h3>Class roster</h3>
+<div class="addrow"><input id="sName" placeholder="Student name"><select id="sGrade"><option value="3">Yr 3</option><option value="4">Yr 4</option><option value="5">Yr 5</option><option value="6">Yr 6</option></select><button class="btn add" id="sAdd">+</button></div>
+<ul class="stlist" id="stList"></ul>
+</div>
+<div class="card prog">
+<h3 id="progTitle">Progress</h3>
+<div class="bar" id="markBar">
+<select id="pYear"><option value="">All years</option><option value="3">Year 3</option><option value="4">Year 4</option><option value="5">Year 5</option><option value="6">Year 6</option></select>
+<select id="pTopic"><option value="">All topics</option></select>
+<select id="pStatus"><option value="">All statuses</option><option value="3">Solved alone</option><option value="2">With help</option><option value="1">Attempted</option><option value="0">Not solved</option><option value="un">Unmarked</option></select>
+<input type="search" id="pQ" placeholder="Search problems…">
+<button class="btn" id="pReset">Clear filters</button>
+</div>
+<div class="subtabs"><button id="subDash" class="on">Dashboard</button><button id="subMark">Mark problems</button><span style="flex:1"></span><button class="btn" id="pCsv">Export progress CSV</button></div>
+<div class="pane on" id="paneDash"><div id="dashBody"></div></div>
+<div class="pane" id="paneMark">
+<div id="diag" style="font-size:11px;color:#7a828f;margin-bottom:8px;"></div>
+<div class="stats" id="pStats"></div>
+<div id="progBody"></div>
+</div>
+</div>
+</div></div>
+
+<div class="overlay" id="overlay"><div class="modal">
+<h2>Add a new problem</h2>
+<div class="fld"><label>Year</label><select id="fYear"><option value="1">Year 1</option><option value="2">Year 2</option><option value="3" selected="">Year 3</option><option value="4">Year 4</option><option value="5">Year 5</option><option value="6">Year 6</option></select></div>
+<div class="fld"><label>Topic</label><input id="fTopic" list="topiclist" placeholder="Choose existing or type a new topic"></div>
+<div class="fld"><label>Problem text</label><textarea id="fProb" placeholder="Type the problem…"></textarea></div>
+<div class="fld"><label>Difficulty</label><select id="fDiff"><option value="1">1 · Easy</option><option value="2" selected="">2 · Medium</option><option value="3">3 · Hard</option><option value="4">4 · Hardest</option></select></div>
+<div class="fld"><label>Source</label><input id="fSrc" placeholder="e.g. FEMO, Kangaroo, own"></div>
+<div class="fld"><label>Image(s) — optional</label><input type="file" id="fImg" accept="image/*" multiple=""><div class="hint">Attach figures if the problem needs a picture.</div><div id="prev"></div></div>
+<div class="rowbtns"><button class="btn" id="revertBtn" style="margin-right:auto;display:none">Revert to original</button><button class="btn" id="cancelBtn">Cancel</button><button class="btn add" id="saveBtn">Save problem</button></div>
+</div></div>
+
+<script>
+/* storage shim: use real localStorage when it works, fall back to in-memory when blocked (e.g. sandboxed preview). */
+/* Only a failed WRITE flags the view as ephemeral, so a normal browser never shows the warning. */
+var __mem=Object.create(null), LS_EPHEMERAL=false;
+function __realLS(){try{return window.localStorage;}catch(e){return null;}}
+var LS={
+  getItem:function(k){var s=__realLS();if(s){try{return s.getItem(k);}catch(e){}}return (k in __mem)?__mem[k]:null;},
+  setItem:function(k,v){var s=__realLS();if(s){try{s.setItem(k,v);return;}catch(e){}}LS_EPHEMERAL=true;__mem[k]=String(v);},
+  removeItem:function(k){var s=__realLS();if(s){try{s.removeItem(k);return;}catch(e){}}delete __mem[k];}
+};
+
+let BASE=[];
+const LSK='y23_added_v1', LSD='y23_deleted_v1', LSE='y23_edits_v1';
+let added=[]; try{added=JSON.parse(LS.getItem(LSK)||'[]')||[];}catch(e){}
+let deleted=[]; try{deleted=JSON.parse(LS.getItem(LSD)||'[]')||[];}catch(e){}
+let edits={}; try{edits=JSON.parse(LS.getItem(LSE)||'{}')||{};}catch(e){}
+/* one-time cleanup: drop stale placeholder source override for problem 452 */
+try{
+  var _mk='b452', _stale='Olympiad (batch)';
+  if(edits[_mk] && edits[_mk].source===_stale){
+    delete edits[_mk].source;
+    var _e=edits[_mk];
+    if(!_e || Object.keys(_e).length===0){ delete edits[_mk]; }
+    try{ LS.setItem(LSE, JSON.stringify(edits)); }catch(e){}
+  }
+}catch(e){}
+function saveLS(){try{LS.setItem(LSK,JSON.stringify(added));LS.setItem(LSD,JSON.stringify(deleted));LS.setItem(LSE,JSON.stringify(edits));}catch(e){alert('Could not auto-save to this browser (storage full). Use “Download updated bank” to keep your additions.');}}
+function sig(x){return (x.topic||"")+""+(x.prob||"")+""+(x.source||"");}
+function allData(){
+  const baseSig=new Set(BASE.map(sig));
+  const merged=BASE.concat(added.filter(a=>!baseSig.has(sig(a))));
+  const del=new Set(deleted);
+  return merged.filter(x=>!del.has(keyOf(x)))
+               .map(x=>{const e=edits[keyOf(x)];return e?Object.assign({},x,e,{_edited:1}):x;});
+}
+const tb=document.getElementById('tb');
+let sortKey='n',sortDir=1;
+const fsrc=document.getElementById('fsrc'), ftopic=document.getElementById('ftopic');
+function refreshFilters(){
+  const cur=allData();
+  const srcs=[...new Set(cur.map(r=>r.source).filter(Boolean))].sort();
+  fsrc.innerHTML='<option value="">All sources</option>'+srcs.map(s=>`<option value="${escAttr(s)}">${escapeHtml(s)}</option>`).join('');
+  const tps=[...new Set(cur.map(r=>r.topic).filter(Boolean))].sort();
+  ftopic.innerHTML='<option value="">All topics</option>'+tps.map(s=>`<option value="${escAttr(s)}">${escapeHtml(s)}</option>`).join('');
+}
+function escapeHtml(s){return (s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function escAttr(s){return escapeHtml(s);}
+function diffBadge(d){return d?`<span class="diff d${d}">${d}</span>`:'';}
+function render(list){
+  lastList=list;
+  tb.innerHTML=list.map(r=>{
+    const imgs=(r.imgs||[]).map(s=>`<img loading="lazy" src="${s}">`).join('');
+    const tag=(r.uid?'<span class="tagnew">added</span>':'')+(r._edited?'<span class="tagedit">edited</span>':'');
+    const p=(r.prob?`<div>${escapeHtml(r.prob)}${tag}</div>`:tag)+imgs;
+    const edt=`<button class="edt" title="Edit" data-key="${keyOf(r)}">&#9998;</button>`;
+    const del=`<button class="del" title="Delete" data-key="${keyOf(r)}">&#10005;</button>`;
+    return `<tr><td class="sel"><input type="checkbox" class="selbox" data-key="${keyOf(r)}"${selected.has(keyOf(r))?" checked":""}></td><td class="n">${r.n}</td><td class="yr">${r.year||''}</td><td class="topic">${escapeHtml(r.topic)}</td><td class="prob">${p}</td><td>${diffBadge(r.diff)}</td><td class="src">${escapeHtml(r.source||'')}</td><td style="white-space:nowrap">${edt}${del}</td></tr>`;
+  }).join('');
+  document.getElementById('count').textContent=list.length+' shown';
+  updateSelUI();
+}
+function apply(){
+  const q=document.getElementById('q').value.toLowerCase();
+  const ft=ftopic.value, fd=document.getElementById('fdiff').value, fs=fsrc.value, fy=document.getElementById('fyear').value;
+  let list=allData().filter(r=>(!q||(r.prob||'').toLowerCase().includes(q)||(r.topic||'').toLowerCase().includes(q))&&(!fy||String(r.year)===fy)&&(!ft||r.topic===ft)&&(!fd||String(r.diff)===fd)&&(!fs||r.source===fs));
+  list.sort((a,b)=>{let x=a[sortKey],y=b[sortKey];if(typeof x==='string'){x=x.toLowerCase();y=(y||'').toLowerCase();}return (x<y?-1:x>y?1:0)*sortDir;});
+  render(list);
+  if(typeof updateTrashCount==='function')updateTrashCount();
+}
+document.querySelectorAll('th[data-k]').forEach(th=>th.addEventListener('click',()=>{
+  const k=th.dataset.k;
+  if(sortKey===k)sortDir*=-1;else{sortKey=k;sortDir=1;}
+  document.querySelectorAll('th').forEach(t=>t.classList.remove('sorted'));th.classList.add('sorted');
+  const ar=th.querySelector('.ar'); if(ar)ar.textContent=sortDir>0?'▲':'▼';
+  apply();
+}));
+['q','fdiff','fyear'].forEach(id=>document.getElementById(id).addEventListener('input',apply));
+ftopic.addEventListener('change',apply); fsrc.addEventListener('change',apply);
+document.getElementById('reset').addEventListener('click',()=>{document.getElementById('q').value='';ftopic.value='';document.getElementById('fdiff').value='';document.getElementById('fyear').value='';fsrc.value='';sortKey='n';sortDir=1;apply();});
+tb.addEventListener('click',e=>{
+  const ed=e.target.closest('.edt');
+  if(ed){openEdit(ed.dataset.key);return;}
+  const b=e.target.closest('.del');if(!b)return;
+  const key=b.dataset.key;
+  const rec=allData().find(r=>keyOf(r)===key);
+  const label=rec?('#'+rec.n+' - '+(rec.topic||'')):'this problem';
+  if(confirm('Delete '+label+'?\n\nYou can undo this until you reload the page, and deletions only take effect in the downloaded problems.json once you export.')){
+    deleted.push(key); delete edits[key];
+    lastDeleted=key; saveLS(); refreshFilters(); apply(); showUndo(label);
+  }
+});
+
+// ---- Delete: undo toast + trash manager ----
+let lastDeleted=null;
+const toast=document.getElementById('toast'), toastMsg=document.getElementById('toastMsg');
+let toastTimer=null;
+function showUndo(label){
+  toastMsg.textContent='Deleted '+label;
+  toast.style.display='flex';
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>{toast.style.display='none';lastDeleted=null;},6000);
+}
+document.getElementById('toastUndo').addEventListener('click',()=>{
+  if(lastDeleted){ deleted=deleted.filter(k=>k!==lastDeleted); lastDeleted=null; saveLS(); refreshFilters(); apply(); }
+  toast.style.display='none';
+});
+function updateTrashCount(){
+  const btn=document.getElementById('trashBtn');
+  btn.textContent='\uD83D\uDDD1 Deleted ('+deleted.length+')';
+  btn.style.display=deleted.length?'inline-block':'none';
+}
+function renderTrash(){
+  const list=document.getElementById('trashList');
+  if(!deleted.length){ list.innerHTML='<p style="color:#64748b">Nothing deleted.</p>'; return; }
+  // build lookup of every problem (including currently-hidden) by key
+  const baseSig=new Set(BASE.map(sig));
+  const all=BASE.concat(added.filter(a=>!baseSig.has(sig(a))));
+  const byKey=new Map(all.map(r=>[keyOf(r),r]));
+  list.innerHTML=deleted.map(k=>{
+    const r=byKey.get(k);
+    const title=r?('#'+r.n+' \u00B7 '+escapeHtml(r.topic||'')):'(unknown problem)';
+    const sub=r?escapeHtml((r.prob||'').slice(0,90)+((r.prob||'').length>90?'\u2026':'')):'';
+    return '<div class="trashrow"><div class="meta"><b>'+title+'</b><br><small>'+sub+'</small></div>'+
+           '<button data-restore="'+k+'">Restore</button></div>';
+  }).join('');
+}
+document.getElementById('trashBtn').addEventListener('click',()=>{renderTrash();document.getElementById('trashOverlay').classList.add('on');});
+document.getElementById('trashClose').addEventListener('click',()=>document.getElementById('trashOverlay').classList.remove('on'));
+document.getElementById('trashOverlay').addEventListener('click',e=>{if(e.target.id==='trashOverlay')e.currentTarget.classList.remove('on');});
+document.getElementById('trashList').addEventListener('click',e=>{
+  const b=e.target.closest('[data-restore]'); if(!b)return;
+  deleted=deleted.filter(k=>k!==b.dataset.restore);
+  saveLS(); refreshFilters(); apply(); renderTrash();
+});
+document.getElementById('trashRestoreAll').addEventListener('click',()=>{
+  if(!deleted.length)return;
+  if(confirm('Restore all '+deleted.length+' deleted problems?')){ deleted=[]; saveLS(); refreshFilters(); apply(); renderTrash(); }
+});
+
+// ---- Add modal ----
+const overlay=document.getElementById('overlay'); let pending=[];
+let editKey=null;
+function setModalMode(){
+  const t=document.querySelector('#overlay .modal h2');
+  if(t) t.textContent = editKey ? 'Edit problem' : 'Add a problem';
+  document.getElementById('saveBtn').textContent = editKey ? 'Save changes' : 'Save problem';
+  const rb=document.getElementById('revertBtn');
+  rb.style.display = (editKey && edits[editKey]) ? 'inline-block' : 'none';
+}
+function openModal(){
+  editKey=null; pending=[];
+  document.getElementById('fYear').value='3';
+  document.getElementById('fTopic').value='';
+  document.getElementById('fProb').value='';
+  document.getElementById('fDiff').value='2';
+  document.getElementById('fSrc').value='';
+  document.getElementById('fImg').value='';
+  document.getElementById('prev').innerHTML='';
+  setModalMode(); overlay.classList.add('on');
+}
+function openEdit(key){
+  const rec=allData().find(r=>keyOf(r)===key);
+  if(!rec){alert('Problem not found.');return;}
+  editKey=key; pending=(rec.imgs||[]).slice();
+  document.getElementById('fYear').value=String(rec.year||3);
+  document.getElementById('fTopic').value=rec.topic||'';
+  document.getElementById('fProb').value=rec.prob||'';
+  document.getElementById('fDiff').value=String(rec.diff||2);
+  document.getElementById('fSrc').value=rec.source||'';
+  document.getElementById('fImg').value='';
+  drawPrev(); setModalMode(); overlay.classList.add('on');
+}
+function closeModal(){overlay.classList.remove('on');}
+document.getElementById('addBtn').addEventListener('click',openModal);
+document.getElementById('cancelBtn').addEventListener('click',closeModal);
+overlay.addEventListener('click',e=>{if(e.target===overlay)closeModal();});
+document.getElementById('fImg').addEventListener('change',e=>{
+  const files=[...e.target.files];
+  files.forEach(f=>{const rd=new FileReader();rd.onload=()=>{pending.push(rd.result);drawPrev();};rd.readAsDataURL(f);});
+});
+function drawPrev(){document.getElementById('prev').innerHTML=pending.map((s,i)=>`<span class="previmg"><img src="${s}"><button data-i="${i}">&times;</button></span>`).join('');}
+document.getElementById('prev').addEventListener('click',e=>{const b=e.target.closest('button');if(b){pending.splice(+b.dataset.i,1);drawPrev();}});
+document.getElementById('saveBtn').addEventListener('click',()=>{
+  const year=+document.getElementById('fYear').value;
+  const topic=document.getElementById('fTopic').value.trim();
+  const prob=document.getElementById('fProb').value.trim();
+  const diff=+document.getElementById('fDiff').value;
+  const source=document.getElementById('fSrc').value.trim();
+  if(!topic){alert('Please enter a topic.');return;}
+  if(!prob&&pending.length===0){alert('Please enter the problem text or attach an image.');return;}
+  if(editKey){
+    const idx=added.findIndex(a=>a.uid===editKey);
+    if(idx>=0){ // edit an added problem in place
+      Object.assign(added[idx],{topic,year,prob,diff,source,imgs:pending.slice()});
+      delete edits[editKey];
+    }else{      // overlay an edit onto a base problem
+      edits[editKey]={topic,year,prob,diff,source,imgs:pending.slice()};
+    }
+  }else{
+    const maxn=allData().reduce((m,r)=>Math.max(m,r.n||0),0);
+    added.push({n:maxn+1,topic,year,prob,diff,source,imgs:pending.slice(),uid:'u'+Date.now()+Math.floor(Math.random()*1000)});
+  }
+  saveLS();closeModal();refreshFilters();apply();
+});
+document.getElementById('revertBtn').addEventListener('click',()=>{
+  if(!editKey)return;
+  if(!confirm('Discard your changes and restore the original version of this problem?'))return;
+  delete edits[editKey]; saveLS(); closeModal(); refreshFilters(); apply();
+});
+
+// ---- Export ----
+function currentData(){return allData().map(({uid,_edited,...r})=>r);}
+function countInlineImgs(data){let c=0;data.forEach(r=>(r.imgs||[]).forEach(s=>{if(s.startsWith('data:'))c++;}));return c;}
+document.getElementById('exportBtn').addEventListener('click',()=>{
+  const data=currentData();
+  const inline=countInlineImgs(data);
+  const blob=new Blob([JSON.stringify(data,null,0)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='problems.json';a.click();
+  setTimeout(()=>{
+    let msg='Saved problems.json ('+data.length+' problems).\n\nUpload this file to your site, replacing the old problems.json.';
+    if(inline) msg+='\n\nNote: '+inline+' image(s) you added in the browser are stored inside the JSON as base64. They will work, but for a tidier site save them into the images/ folder and use paths like "images/name.jpg" instead.';
+    alert(msg);
+  },300);
+});
+
+
+// ---- Selection & worksheet export (PDF / Word) ----
+const selected=new Set();
+const keyOf=r=>r.uid||('b'+r.n);
+let lastList=[];
+const pdfBtn=document.getElementById('pdfBtn'),docBtn=document.getElementById('docBtn');
+function updateSelUI(){
+  document.getElementById('selInfo').textContent=selected.size+' selected';
+  const sa=document.getElementById('selAll');
+  const some=lastList.some(r=>selected.has(keyOf(r)));
+  const all=lastList.length>0&&lastList.every(r=>selected.has(keyOf(r)));
+  sa.checked=all; sa.indeterminate=some&&!all;
+  pdfBtn.disabled=docBtn.disabled=(selected.size===0);
+}
+tb.addEventListener('change',e=>{
+  const c=e.target.closest('.selbox'); if(!c)return;
+  if(c.checked)selected.add(c.dataset.key); else selected.delete(c.dataset.key);
+  updateSelUI();
+});
+document.getElementById('selAll').addEventListener('change',e=>{
+  if(e.target.checked)lastList.forEach(r=>selected.add(keyOf(r)));
+  else lastList.forEach(r=>selected.delete(keyOf(r)));
+  apply();
+});
+document.getElementById('clearSel').addEventListener('click',()=>{selected.clear();apply();});
+
+function selectedProblems(){
+  const map=new Map(allData().map(r=>[keyOf(r),r]));
+  let list=[...selected].map(k=>map.get(k)).filter(Boolean).sort((a,b)=>a.n-b.n);
+  if(document.getElementById('optOrder').value==='topic')
+    list.sort((a,b)=>(a.topic||'').localeCompare(b.topic||'')||(a.n-b.n));
+  return list;
+}
+function measureImgs(list){
+  const srcs=[...new Set(list.flatMap(r=>r.imgs||[]))];
+  return Promise.all(srcs.map(s=>new Promise(res=>{
+    const im=new Image();
+    im.onload=()=>res([s,{w:im.naturalWidth||300,h:im.naturalHeight||200}]);
+    im.onerror=()=>res([s,{w:300,h:200}]);
+    im.src=s;
+  }))).then(en=>new Map(en));
+}
+function scaleDim(d,max){const k=d.w>max?max/d.w:1;return{w:Math.max(1,Math.round(d.w*k)),h:Math.max(1,Math.round(d.h*k))};}
+function worksheetBody(list,opts){
+  const meta=document.getElementById('optMeta').checked;
+  const grouped=document.getElementById('optOrder').value==='topic';
+  const today=new Date().toLocaleDateString();
+  let out='<h1 class="wtitle">Year 2\u20133 Olympiad \u2014 Problem Set</h1><p class="wdate">'+today+' \u00b7 '+list.length+' problem'+(list.length>1?'s':'')+'</p>';
+  let curTopic=null;
+  list.forEach((r,i)=>{
+    if(grouped&&r.topic!==curTopic){curTopic=r.topic;out+='<h2 class="wtopic">'+escapeHtml(curTopic)+'</h2>';}
+    let m='';
+    if(meta)m='<span class="wmeta">&nbsp;&nbsp;[#'+r.n+(r.year?' \u00b7 Year '+r.year:'')+((r.topic&&!grouped)?' \u00b7 '+escapeHtml(r.topic):'')+(r.diff?' \u00b7 difficulty '+r.diff:'')+(r.source?' \u00b7 '+escapeHtml(r.source):'')+']</span>';
+    out+='<div class="witem"><p class="wprob"><b>'+(i+1)+'.</b> '+escapeHtml(r.prob||'').replace(/\n/g,'<br>')+m+'</p>';
+    (r.imgs||[]).forEach(s=>{
+      const d=scaleDim((opts.dims&&opts.dims.get(s))||{w:300,h:200},opts.maxImg||340);
+      const src=(opts.srcMap&&opts.srcMap.get(s))||s;
+      out+='<img src="'+src+'" width="'+d.w+'" height="'+d.h+'" style="display:block;margin:6pt 0;">';
+    });
+    out+='</div>';
+  });
+  return out;
+}
+const W_CSS="body{font-family:Georgia,'Times New Roman',serif;font-size:12pt;color:#000;}"+
+ ".wtitle{font-size:16pt;margin:0 0 2pt 0;} .wdate{color:#555;margin:0 0 14pt 0;font-size:10pt;}"+
+ ".wtopic{font-size:13pt;margin:14pt 0 6pt 0;padding-bottom:2pt;border-bottom:1pt solid #999;}"+
+ ".witem{margin:0 0 14pt 0;} .wprob{margin:0 0 4pt 0;line-height:1.45;} .wmeta{color:#666;font-size:10pt;}";
+
+pdfBtn.addEventListener('click',async()=>{
+  const list=selectedProblems(); if(!list.length)return;
+  const dims=await measureImgs(list);
+  const body=worksheetBody(list,{dims,maxImg:340});
+  const w=window.open('','_blank');
+  if(!w){alert('Please allow pop-ups for this page to export the PDF.');return;}
+  w.document.write('<!DOCTYPE html><html><head><meta charset="utf-8"><title>Problem Set</title><style>'+W_CSS+
+    '@media print{.witem{page-break-inside:avoid;} .wtopic{page-break-after:avoid;}} @page{margin:2cm;} body{margin:24px;}'+
+    '</style></head><body>'+body+
+    '<scr'+'ipt>window.onload=function(){setTimeout(function(){window.print();},400);};</scr'+'ipt></body></html>');
+  w.document.close();
+});
+
+docBtn.addEventListener('click',async()=>{
+  const list=selectedProblems(); if(!list.length)return;
+  const dims=await measureImgs(list);
+  const srcs=[...new Set(list.flatMap(r=>r.imgs||[]))].filter(s=>s.startsWith('data:'));
+  const srcMap=new Map(srcs.map((s,i)=>{
+    const mime=s.slice(5,s.indexOf(';'))||'image/png';
+    const ext=(mime.split('/')[1]||'png').replace(/[^a-z0-9]/gi,'')||'png';
+    return [s,'file:///C:/problemset/img'+i+'.'+ext];
+  }));
+  const body=worksheetBody(list,{dims,maxImg:340,srcMap});
+  const doc='<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">'+
+   '<head><meta charset="utf-8"><!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View></w:WordDocument></xml><![endif]-->'+
+   '<style>@page WordSection1{size:595.3pt 841.9pt;margin:56.7pt;}div.WordSection1{page:WordSection1;}'+W_CSS+'</style></head>'+
+   '<body><div class="WordSection1">'+body+'</div></body></html>';
+  const B='----=_ProblemSetPart';
+  const b64utf8=s=>btoa(unescape(encodeURIComponent(s)));
+  const chunk=s=>s.replace(/(.{76})/g,'$1\r\n');
+  let mht='MIME-Version: 1.0\r\nContent-Type: multipart/related; type="text/html"; boundary="'+B+'"\r\n\r\n';
+  mht+='--'+B+'\r\nContent-Type: text/html; charset="utf-8"\r\nContent-Transfer-Encoding: base64\r\nContent-Location: file:///C:/problemset/doc.htm\r\n\r\n'+chunk(b64utf8(doc))+'\r\n\r\n';
+  srcs.forEach(s=>{
+    const mime=s.slice(5,s.indexOf(';'))||'image/png';
+    mht+='--'+B+'\r\nContent-Type: '+mime+'\r\nContent-Transfer-Encoding: base64\r\nContent-Location: '+srcMap.get(s)+'\r\n\r\n'+chunk(s.slice(s.indexOf(',')+1))+'\r\n\r\n';
+  });
+  mht+='--'+B+'--';
+  const blob=new Blob([mht],{type:'application/msword'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='Problem Set.doc';
+  a.click();
+});
+
+function showLoadError(e){
+  const tbl=document.getElementById('tb');
+  if(tbl) tbl.innerHTML='<tr><td colspan="9" style="padding:24px;color:#b91c1c;line-height:1.6">'+
+    '<b>Could not load problems.json</b><br>'+String(e)+
+    '<br><br>If you are opening this file directly from your computer, browsers block local file loading. '+
+    'Either upload the folder to your website, or run a local server:<br>'+
+    '<code style="background:#f1f5f9;padding:2px 6px;border-radius:4px">python3 -m http.server</code> then open '+
+    '<code style="background:#f1f5f9;padding:2px 6px;border-radius:4px">http://localhost:8000</code></td></tr>';
+}
+BASE=[];
+fetch('problems.json').then(r=>r.json()).then(d=>{BASE=d;refreshFilters();apply();}).catch(e=>{document.body.insertAdjacentHTML('afterbegin','<div style="padding:12px;background:#fee;border:1px solid #f99;margin:8px">Could not load problems.json. If opening locally, run <code>python3 -m http.server</code> and open http://localhost:8000</div>');});
+
+// ---- Students & progress ----
+const LSS='y23_students_v1', LSP='y23_progress_v1';
+let students=[]; try{students=JSON.parse(LS.getItem(LSS)||'[]')||[];}catch(e){}
+let progress={}; try{progress=JSON.parse(LS.getItem(LSP)||'{}')||{};}catch(e){}
+let activeSt=students.length?students[0].id:null;
+const STATUS={3:['Solved alone','m3'],2:['With help','m2'],1:['Attempted','m1'],0:['Not solved','m0']};
+const COL={3:'#1a7f4b',2:'#d59300',1:'#64748b',0:'#94a3b8',un:'#e2e8f0'};  /* moved up: used by drawDash() which can run before the old location during initial load with a saved student */
+function saveStu(){try{LS.setItem(LSS,JSON.stringify(students));LS.setItem(LSP,JSON.stringify(progress));}
+  catch(e){alert('Could not save to this browser (storage full).');}}
+
+// tabs
+const vB=document.getElementById('viewBank'),vS=document.getElementById('viewStu');
+const tB=document.getElementById('tabBank'),tS=document.getElementById('tabStu');
+tB.addEventListener('click',()=>{tB.classList.add('on');tS.classList.remove('on');vB.classList.add('on');vS.classList.remove('on');});
+tS.addEventListener('click',()=>{tS.classList.add('on');tB.classList.remove('on');vS.classList.add('on');vB.classList.remove('on');drawStudents();drawProgress();});
+
+// roster
+document.getElementById('sAdd').addEventListener('click',addStudent);
+document.getElementById('sName').addEventListener('keydown',e=>{if(e.key==='Enter')addStudent();});
+function addStudent(){
+  const el=document.getElementById('sName'), nm=el.value.trim();
+  if(!nm){el.focus();return;}
+  const id='s'+Date.now()+Math.floor(Math.random()*1000);
+  students.push({id,name:nm,grade:+document.getElementById('sGrade').value});
+  students.sort((a,b)=>a.grade-b.grade||a.name.localeCompare(b.name));
+  activeSt=id; el.value=''; saveStu(); drawStudents(); drawProgress();
+}
+function drawStudents(){
+  const ul=document.getElementById('stList');
+  if(!students.length){ul.innerHTML='<li class="empty">No students yet \u2014 add one above.</li>';return;}
+  ul.innerHTML=students.map(s=>{
+    const m=progress[s.id]||{}, done=Object.values(m).filter(v=>v===3).length;
+    return '<li class="'+(s.id===activeSt?'on':'')+'" data-id="'+s.id+'">'+
+      '<span class="nm">'+escapeHtml(s.name)+'</span>'+
+      '<span class="gr">Yr '+s.grade+' \u00b7 '+done+' solved</span>'+
+      '<button class="rm" data-del="'+s.id+'" title="Remove">&#10005;</button></li>';
+  }).join('');
+}
+document.getElementById('stList').addEventListener('click',e=>{
+  const d=e.target.closest('[data-del]');
+  if(d){
+    const st=students.find(x=>x.id===d.dataset.del);
+    if(confirm('Remove '+(st?st.name:'this student')+' and their progress?')){
+      students=students.filter(x=>x.id!==d.dataset.del); delete progress[d.dataset.del];
+      if(activeSt===d.dataset.del)activeSt=students.length?students[0].id:null;
+      saveStu(); drawStudents(); drawProgress();
+    }
+    return;
+  }
+  const li=e.target.closest('li[data-id]');
+  if(li){activeSt=li.dataset.id;drawStudents();drawProgress();}
+});
+
+// progress table
+['pYear','pTopic','pStatus','pQ'].forEach(id=>{
+  const el=document.getElementById(id);
+  el.addEventListener(el.tagName==='INPUT'?'input':'change',drawProgress);
+});
+function progList(){
+  const y=document.getElementById('pYear').value, t=document.getElementById('pTopic').value;
+  const st=document.getElementById('pStatus').value, q=document.getElementById('pQ').value.toLowerCase();
+  const m=progress[activeSt]||{};
+  return allData().filter(r=>{
+    if(y&&String(r.year)!==y)return false;
+    if(t&&r.topic!==t)return false;
+    if(q&&!((r.prob||'').toLowerCase().includes(q)||(r.topic||'').toLowerCase().includes(q)))return false;
+    const v=m[keyOf(r)];
+    if(st==='un')return v===undefined;
+    if(st!=='')return String(v)===st;
+    return true;
+  }).sort((a,b)=>a.n-b.n);
+}
+function drawProgress(){
+  if(typeof drawDash==='function'&&document.getElementById('paneDash').classList.contains('on'))drawDash();
+  const title=document.getElementById('progTitle'), body=document.getElementById('progBody'), stats=document.getElementById('pStats');
+  const cur=allData();
+  const tps=[...new Set(cur.map(r=>r.topic).filter(Boolean))].sort();
+  const sel=document.getElementById('pTopic'), keep=sel.value;
+  sel.innerHTML='<option value="">All topics</option>'+tps.map(s=>'<option value="'+escAttr(s)+'">'+escapeHtml(s)+'</option>').join('');
+  sel.value=keep;
+  const dg=document.getElementById('diag');
+  if(dg)dg.textContent='Bank: '+cur.length+' problems loaded \u00b7 '+students.length+' student(s) in roster \u00b7 active: '+(activeSt||'none')+(LS_EPHEMERAL?'  \u2014  \u26a0 storage is blocked in this view: roster/progress stay only until you reload. Open the downloaded file in a browser (Chrome/Safari/Edge) to save them.':'');
+  const stu=students.find(s=>s.id===activeSt);
+  if(!stu){title.textContent='Progress';stats.innerHTML='';body.innerHTML='<div class="empty"><b>No student selected.</b><br>Add a student in the roster on the left (type a name, choose a year, press +), then click their name. The full list of problems will appear here for marking.</div>';return;}
+  title.textContent=stu.name+' \u2014 Year '+stu.grade;
+  const m=progress[stu.id]||{};
+  const c={3:0,2:0,1:0,0:0};
+  cur.forEach(r=>{const v=m[keyOf(r)];if(v!==undefined)c[v]++;});
+  const marked=c[3]+c[2]+c[1]+c[0];
+  stats.innerHTML='<span class="chip s3">Solved alone: '+c[3]+'</span><span class="chip s2">With help: '+c[2]+
+    '</span><span class="chip s1">Attempted: '+c[1]+'</span><span class="chip s0">Not solved: '+c[0]+
+    '</span><span class="chip">Unmarked: '+(cur.length-marked)+'</span>';
+  const list=progList();
+  if(!list.length){body.innerHTML='<div class="empty">No problems match these filters. Click \u201cClear filters\u201d to show all '+cur.length+' problems.</div>';return;}
+  body.innerHTML='<table class="ptable"><thead><tr><th>#</th><th>Yr</th><th>Topic</th><th>Problem</th><th>Result</th></tr></thead><tbody>'+
+    list.map(r=>{
+      const k=keyOf(r), v=m[k];
+      const btns=[3,2,1,0].map(s=>'<button class="'+STATUS[s][1]+(v===s?' on':'')+'" data-k="'+k+'" data-v="'+s+'">'+STATUS[s][0]+'</button>').join('');
+      const txt=escapeHtml((r.prob||'').slice(0,180))+((r.prob||'').length>180?'\u2026':'')+((r.imgs&&r.imgs.length)?' <i>(figure)</i>':'');
+      return '<tr><td class="n">'+r.n+'</td><td class="n">'+(r.year||'')+'</td><td class="topic">'+escapeHtml(r.topic)+
+        '</td><td class="pt">'+txt+'</td><td><div class="marks">'+btns+'</div></td></tr>';
+    }).join('')+'</tbody></table>';
+}
+document.getElementById('progBody').addEventListener('click',e=>{
+  const b=e.target.closest('button[data-v]'); if(!b||!activeSt)return;
+  const m=progress[activeSt]||(progress[activeSt]={});
+  const v=+b.dataset.v;
+  if(m[b.dataset.k]===v)delete m[b.dataset.k]; else m[b.dataset.k]=v;
+  saveStu(); drawStudents(); drawProgress();
+});
+document.getElementById('pReset').addEventListener('click',()=>{
+  ['pYear','pTopic','pStatus','pQ'].forEach(id=>document.getElementById(id).value='');
+  drawProgress();
+});
+document.getElementById('pCsv').addEventListener('click',()=>{
+  if(!students.length){alert('Add a student first.');return;}
+  const cur=allData().sort((a,b)=>a.n-b.n);
+  const esc=s=>'"'+String(s==null?'':s).replace(/"/g,'""')+'"';
+  const rows=[['Student','Grade','Problem #','Year','Topic','Difficulty','Result','Problem'].map(esc).join(',')];
+  students.forEach(s=>{const m=progress[s.id]||{};cur.forEach(r=>{
+    const v=m[keyOf(r)]; if(v===undefined)return;
+    rows.push([s.name,'Year '+s.grade,r.n,r.year||'',r.topic||'',r.diff||'',STATUS[v][0],(r.prob||'').replace(/\s+/g,' ')].map(esc).join(','));
+  });});
+  if(rows.length===1){alert('No results recorded yet.');return;}
+  const blob=new Blob(['\ufeff'+rows.join('\r\n')],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Student progress.csv';a.click();
+});
+
+drawStudents(); drawProgress();
+
+// ---- Dashboard ----
+const sD=document.getElementById('subDash'), sM=document.getElementById('subMark');
+const pD=document.getElementById('paneDash'), pM=document.getElementById('paneMark');
+const markBar=document.getElementById('markBar');
+function showPane(dash){
+  sD.classList.toggle('on',dash); sM.classList.toggle('on',!dash);
+  pD.classList.toggle('on',dash); pM.classList.toggle('on',!dash);
+  markBar.style.display=dash?'none':'';
+  if(dash)drawDash();
+}
+sD.addEventListener('click',()=>showPane(true));
+sM.addEventListener('click',()=>showPane(false));
+
+function donut(counts,total){
+  const R=52,C=2*Math.PI*R; let off=0, segs='';
+  [3,2,1,0,'un'].forEach(k=>{
+    const v=counts[k]||0; if(!v)return;
+    const len=C*v/total;
+    segs+='<circle cx="60" cy="60" r="'+R+'" fill="none" stroke="'+COL[k]+'" stroke-width="15" '+
+      'stroke-dasharray="'+len.toFixed(2)+' '+(C-len).toFixed(2)+'" stroke-dashoffset="'+(-off).toFixed(2)+
+      '" transform="rotate(-90 60 60)"></circle>';
+    off+=len;
+  });
+  const pct=total?Math.round((counts[3]||0)*100/total):0;
+  return '<svg viewBox="0 0 120 120" width="120" height="120">'+
+    '<circle cx="60" cy="60" r="'+R+'" fill="none" stroke="#eef2f7" stroke-width="15"></circle>'+segs+
+    '<text x="60" y="57" text-anchor="middle" font-size="23" font-weight="800" fill="#1F4E78">'+pct+'%</text>'+
+    '<text x="60" y="74" text-anchor="middle" font-size="9" fill="#64748b">solved alone</text></svg>';
+}
+function stackBar(c,tot){
+  return '<div class="track">'+[3,2,1,0].map(k=>{
+    const v=c[k]||0; return v?'<span style="width:'+(v*100/tot)+'%;background:'+COL[k]+'" title="'+STATUS[k][0]+': '+v+'"></span>':'';
+  }).join('')+'</div>';
+}
+function drawDash(){
+  const box=document.getElementById('dashBody');
+  const stu=students.find(s=>s.id===activeSt);
+  if(!stu){box.innerHTML='<div class="empty"><b>No student selected.</b><br>Add a student in the roster on the left to see their dashboard.</div>';return;}
+  const m=progress[stu.id]||{};
+  const cur=allData().filter(r=>String(r.year)===String(stu.grade));
+  const pool=cur.length?cur:allData();
+  const scope=cur.length?('Year '+stu.grade+' problems'):'all problems';
+  const c={3:0,2:0,1:0,0:0}; let marked=0;
+  pool.forEach(r=>{const v=m[keyOf(r)];if(v!==undefined){c[v]++;marked++;}});
+  const un=pool.length-marked;
+  const attempted=c[3]+c[2]+c[1];
+  const indep=attempted?Math.round(c[3]*100/attempted):0;
+
+  // by topic
+  const byT={};
+  pool.forEach(r=>{const t=r.topic||'\u2014';(byT[t]=byT[t]||{3:0,2:0,1:0,0:0,tot:0}).tot++;
+    const v=m[keyOf(r)];if(v!==undefined)byT[t][v]++;});
+  const topics=Object.entries(byT).map(([t,d])=>{
+    const at=d[3]+d[2]+d[1], sc=at?d[3]/at:null;
+    return {t,d,at,marked:d[3]+d[2]+d[1]+d[0],sc};
+  });
+  const rated=topics.filter(x=>x.at>=2).sort((a,b)=>b.sc-a.sc||b.at-a.at);
+  const strong=rated.slice(0,5), weak=rated.slice().reverse().slice(0,5);
+
+  // by difficulty
+  const byD={};
+  pool.forEach(r=>{const k=r.diff||0;(byD[k]=byD[k]||{3:0,2:0,1:0,0:0,tot:0}).tot++;
+    const v=m[keyOf(r)];if(v!==undefined)byD[k][v]++;});
+
+  const dl=['','1 \u00b7 Easy','2 \u00b7 Medium','3 \u00b7 Hard','4 \u00b7 Hardest'];
+  let html='<div class="kpis">'+
+    '<div class="kpi g"><div class="v">'+c[3]+'</div><div class="l">Solved alone</div></div>'+
+    '<div class="kpi a"><div class="v">'+c[2]+'</div><div class="l">Solved with help</div></div>'+
+    '<div class="kpi"><div class="v">'+c[1]+'</div><div class="l">Attempted</div></div>'+
+    '<div class="kpi"><div class="v">'+c[0]+'</div><div class="l">Not solved</div></div>'+
+    '<div class="kpi"><div class="v">'+indep+'%</div><div class="l">Independence rate</div></div>'+
+    '<div class="kpi"><div class="v">'+marked+'/'+pool.length+'</div><div class="l">Problems covered</div></div>'+
+    '</div><div class="dash">';
+
+  html+='<div class="dcard"><h4>Overall breakdown</h4><div class="ring">'+donut({...c,un},pool.length)+
+    '<div class="lg">'+[3,2,1,0].map(k=>'<div><i style="background:'+COL[k]+'"></i>'+STATUS[k][0]+' \u2014 <b>'+c[k]+'</b></div>').join('')+
+    '<div><i style="background:'+COL.un+'"></i>Not yet marked \u2014 <b>'+un+'</b></div></div></div>'+
+    '<div class="hint2">Based on '+pool.length+' '+scope+'.</div></div>';
+
+  html+='<div class="dcard"><h4>By difficulty</h4><div class="bars">'+
+    [1,2,3,4].map(k=>{const d=byD[k];if(!d||!d.tot)return '';
+      const mk=d[3]+d[2]+d[1]+d[0];
+      return '<div class="brow"><div class="nm">'+dl[k]+'</div>'+stackBar(d,d.tot)+
+        '<div class="pc">'+(mk?Math.round(d[3]*100/d.tot):0)+'%</div></div>';}).join('')+
+    '</div><div class="hint2">Bar width shows the share of that difficulty band marked; the figure is the percentage solved unaided.</div></div>';
+
+  html+='<div class="dcard wide"><h4>Strengths &amp; areas to work on</h4>';
+  if(!rated.length){html+='<div class="hint2">Mark at least two problems in a topic to see topic-level analysis.</div>';}
+  else{html+='<div class="strengths"><div><h5>Strongest topics</h5><ul>'+
+    strong.map(x=>'<li>'+escapeHtml(x.t)+'<span>'+Math.round(x.sc*100)+'% of '+x.at+'</span></li>').join('')+
+    '</ul></div><div><h5>Needs practice</h5><ul>'+
+    weak.map(x=>'<li>'+escapeHtml(x.t)+'<span>'+Math.round(x.sc*100)+'% of '+x.at+'</span></li>').join('')+
+    '</ul></div></div><div class="hint2">Percentage of attempted problems solved without help. Topics with fewer than two attempts are not ranked.</div>';}
+  html+='</div>';
+
+  html+='<div class="dcard wide"><h4>Every topic</h4><div class="bars">'+
+    topics.sort((a,b)=>a.t.localeCompare(b.t)).map(x=>
+      '<div class="brow"><div class="nm" title="'+escAttr(x.t)+'">'+escapeHtml(x.t)+'</div>'+
+      stackBar(x.d,x.d.tot)+'<div class="pc">'+x.marked+'/'+x.d.tot+'</div></div>').join('')+
+    '</div><div class="hint2">Green = solved alone, amber = with help, grey = attempted, light grey = not solved. Empty space is unmarked. The figure counts problems marked out of the topic total.</div></div>';
+
+  html+='</div>';
+  box.innerHTML=html;
+}
+showPane(true);
+</script></body></html>
