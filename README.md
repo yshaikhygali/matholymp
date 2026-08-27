@@ -1,6 +1,6 @@
 # Junior School Math Olympiad — Problem Bank
 
-A browsable bank of **1,411 olympiad problems** for primary pupils, aimed at Years 3–6 (British programme) / Grades 1–4 (Kazakhstan and former Soviet programmes). Problems are collected from olympiads and sorted by topic, year and difficulty.
+A browsable bank of **1,431 olympiad problems** for primary pupils, aimed at Years 3–6 (British programme) / Grades 1–4 (Kazakhstan and former Soviet programmes). Problems are collected from olympiads and sorted by topic, year and difficulty.
 
 The repository is a self-contained static site: open `index.html` and the whole bank is filterable, printable and exportable in the browser.
 
@@ -20,8 +20,8 @@ It also works as-is on GitHub Pages (Settings → Pages → deploy from `main`, 
 | Path | What it is |
 | --- | --- |
 | `index.html` | The viewer: filtering, problem-set builder, print view, progress tracking |
-| `problems.json` | The problem bank — a flat JSON array of 1,411 problems |
-| `images/` | 292 figures referenced by problems (grids, clocks, nets, diagrams) |
+| `problems.json` | The problem bank — a flat JSON array of 1,431 problems |
+| `images/` | 293 figures referenced by problems (grids, clocks, nets, diagrams) |
 
 ## Problem schema
 
@@ -41,8 +41,8 @@ Each entry in `problems.json` is an object:
 
 | Field | Meaning |
 | --- | --- |
-| `n` | Unique problem ID, `1`–`1414` (a few numbers are unused where duplicates were removed) |
-| `topic` | One of 41 topics (see below) |
+| `n` | Unique problem ID, `1`–`1434` (a few numbers are unused where duplicates were removed) |
+| `topic` | One of 42 topics (see below) |
 | `year` | Target year group |
 | `prob` | Problem statement (may contain newlines). English, except the Altyn Saqa problems, which are in Russian |
 | `diff` | Difficulty, `1` (easiest) – `4` (hardest) |
@@ -51,48 +51,48 @@ Each entry in `problems.json` is an object:
 
 ## Composition
 
-**By year group** — Year 3: 324 · Year 4: 351 · Year 5: 386 · Year 6: 342 · Year 1: 8
+**By year group** — Year 3: 324 · Year 4: 371 · Year 5: 386 · Year 6: 342 · Year 1: 8
 
-**By difficulty** — 1: 76 · 2: 353 · 3: 566 · 4: 416
+**By difficulty** — 1: 79 · 2: 365 · 3: 571 · 4: 416
 
-**By source** — FEMO: 879 · Saint Petersburg Mathematical Olympiad: 485 · Altyn Saqa: 47
+**By source** — FEMO: 879 · Saint Petersburg Mathematical Olympiad: 485 · Altyn Saqa: 67
 
 **By topic**
 
 | Topic | Count |
 | --- | ---: |
-| Equations | 117 |
-| Arithmetic word problem – finding the whole or part | 112 |
-| Digit properties / number puzzles | 108 |
+| Equations | 118 |
+| Arithmetic word problem – finding the whole or part | 116 |
+| Digit properties / number puzzles | 109 |
 | Spatial reasoning | 101 |
 | Logic – quantitative bounding | 95 |
-| Combinatorics – arrangements / permutations | 66 |
-| Sets – inclusion–exclusion | 61 |
-| Age problems | 58 |
+| Combinatorics – arrangements / permutations | 67 |
+| Sets – inclusion–exclusion | 62 |
+| Age problems | 59 |
 | Logic – knights and liars | 58 |
 | Arithmetic – net displacement | 50 |
-| Iterative / process counting | 46 |
-| Counting 2D figures | 44 |
-| Number sequences & patterns | 43 |
-| Cryptarithm | 40 |
+| Iterative / process counting | 47 |
+| Counting 2D figures | 45 |
+| Number sequences & patterns | 45 |
+| Cryptarithm | 41 |
 | Counting digits | 38 |
 | Figures and numbers | 38 |
 | Geometry – perimeter of combined figures | 38 |
+| Logic – matching | 35 |
 | Cuts and pieces (fencepost counting) | 34 |
-| Logic – matching | 34 |
 | Work rate / productivity | 30 |
 | Heads and legs | 27 |
 | Logic – sequence / correspondence reasoning | 25 |
 | Remainder / equal distribution | 22 |
+| Geometry – area of combined figures | 22 |
 | Counting consecutive numbers | 21 |
-| Geometry – area of combined figures | 20 |
+| Clock / time reading | 19 |
 | Calendar reasoning | 19 |
-| Clock / time reading | 18 |
 | Circular arrangement | 16 |
 | LCM / common multiples (cycles) | 8 |
 | Graph colouring | 5 |
+| Arithmetic – computation | 5 |
 | Ciphers / decoding | 4 |
-| Arithmetic – computation | 4 |
 | Logic – casework counting | 2 |
 | Tournaments / handshakes | 2 |
 | Symmetry | 1 |
@@ -102,6 +102,7 @@ Each entry in `problems.json` is an object:
 | Route traversal / Euler routes | 1 |
 | Units and measurement | 1 |
 | Logic – quantifiers and negation | 1 |
+| Defined operations | 1 |
 
 ## Editing the bank
 
